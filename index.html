@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de funcionário</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        .table tbody td:last-child button:last-child {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1>Cadastro de funcionários</h1>
+        <form class="form" id="form_funcionarios" action="" onsubmit="cadastraFuncionario(event, this)">
+            <input type="hidden" name="chave" id="chave">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label for="nome">Nome:</label>
+                    <input placeholder="Digite o nome do funcionário" id="nome" type="text" class="form-control"
+                        name="nome">
+                </div>
+                <div class="col-4">
+                    <label for="funcao">Função:</label>
+                    <input id="funcao" placeholder="Digite sua função na empresa" type="text" class="form-control"
+                        name="funcao">
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-12">
+                    <button class="btn btn-success" type="submit">Salvar</button>
+                    <button class="btn btn-dark" type="button"
+                        onclick="document.querySelector('.form').reset();">Limpar</button>
+                </div>
+            </div>
+        </form>
+        <div class="row" style="margin-top: 10px;">
+            <div class="col-12">
+                <h3>Listagem dos funcionários</h3>
+                <table id="table_funcionarios" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td>Chave</td>
+                            <td>Nome</td>
+                            <td>Função</td>
+                            <td>Ação</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <button class="btn btn-danger" type="button" onclick="removerFuncionariosCadastrados()">
+                    Deletar todos os funcionários <i class="fa fa-trash"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="./index.js"></script>
+</body>
+
+</html>
