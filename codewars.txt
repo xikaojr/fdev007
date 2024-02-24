@@ -1,7 +1,2 @@
-Crie uma função chamada createPhoneNumber que vai receber um array de 10 números e retornar uma string formatada;
-
-
-exemplo: se eu chamar a função assim
-createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) deve ter como saída (return) uma string assim: "(123) 456-7890"
-
-Deu pra entender?
+Crie uma função chamada createPhoneNumber que vai receber um array de 10 números inteiros e retornar uma string formatada como se fosse um telefone;
+createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) //"(123) 456-7890"
