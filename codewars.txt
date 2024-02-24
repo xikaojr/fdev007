@@ -1,2 +1,6 @@
-Crie uma função chamada createPhoneNumber que vai receber um array de 10 números inteiros e retornar uma string formatada como se fosse um telefone;
-createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) //"(123) 456-7890"
+1º Crie uma função chamada createPhoneNumber que vai receber um array de 10 números inteiros e retornar uma string formatada como se fosse um telefone;
+Exemplo: createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) //"(123) 456-7890"
+
+
+2º Escreva uma função que receba um número inteiro como entrada e retorne o número de bits que são iguais a "um" na representação binária desse número. Você pode garantir que a entrada é não negativa.
+Exemplo: A representação binária de 1234 é 10011010010, então a função deve retornar 5 neste caso.
