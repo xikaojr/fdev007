@@ -1,6 +1,31 @@
-1º Crie uma função chamada createPhoneNumber que vai receber um array de 10 números inteiros e retornar uma string formatada como se fosse um telefone;
-Exemplo: createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) //"(123) 456-7890"
+1º Here's a function called `createPhoneNumber` that takes an array of 10 integers and returns a string formatted as a phone number: 
+createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) //"(123) 456-7890"
+R: [[001 - Resultado]]	
 
 
-2º Escreva uma função que receba um número inteiro como entrada e retorne o número de bits que são iguais a "um" na representação binária desse número. Você pode garantir que a entrada é não negativa.
-Exemplo: A representação binária de 1234 é 10011010010, então a função deve retornar 5 neste caso.
+2º Write a function that takes an integer as input, and returns the number of bits that are equal to one in the binary representation of that number. You can guarantee that input is non-negative. _Example_: The binary representation of `1234` is `10011010010`, so the function should return `5` in this case
+
+
+3º An isogram is a word that has no repeating letters, consecutive or non-consecutive. Implement a function that determines whether a string that contains only letters is an isogram. Assume the empty string is an isogram. Ignore letter case.
+**Example: (Input --> Output)**
+"Dermatoglyphics" --> true "aba" --> false "moOse" --> false (ignore letter case)
+
+
+4º Implement a function that accepts 3 integer values a, b, c. The function should return true if a triangle can be built with the sides of given length and false in any other case.
+
+(In this case, all triangles must have surface greater than 0 to be accepted).
+
+Examples:
+
+```
+Input -> Output
+1,2,2 -> true
+4,2,3 -> true
+2,2,2 -> true
+1,2,3 -> false
+-5,1,3 -> false
+0,2,3 -> false
+1,2,9 -> false 
+```
+
+5º ?
