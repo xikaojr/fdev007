@@ -7,4 +7,6 @@ function isAIsograma(str) {
     }
     return true; 
 }
-console.log(isAIsograma('vida')); // true
+console.log(isAIsograma('vida')); 
+
+
