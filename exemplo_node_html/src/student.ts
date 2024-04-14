@@ -12,10 +12,11 @@ class Student {
 interface Person {
   firstName: string;
   lastName: string;
+  idade?: number;
 }
 
 function greeter(person: Person) {
-  return "Olá, " + person.firstName + " " + person.lastName;
+  return "FALA GALERINHA OLHA O NOME DA FULANA: , " + person.firstName + " " + person.lastName;
 }
 
 let user = new Student("Jane", "M.", "User");
