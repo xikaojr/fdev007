@@ -2,7 +2,7 @@ import express from 'express'
 // import itensRouter from './routers/itens-router'
 import cors from 'cors'
 
-const PORT = 8000
+const PORT = 8009
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
