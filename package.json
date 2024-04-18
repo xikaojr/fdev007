@@ -1,11 +1,11 @@
 {
   "name": "express-api",
   "version": "1.0.0",
-  "main": "./src/index.js",
+  "main": "src/index.js",
   "scripts": {
     "dev": "nodemon --watch \"src/**\" --ext \"ts,json\" --exec \"ts-node ./src/index.ts\"",
     "build": "tsc",
-    "start": "node ./dist/index.js"
+    "start": "node dist/index.js"
   },
   "license": "MIT",
   "dependencies": {
@@ -14,7 +14,8 @@
     "@types/node": "^20.12.7",
     "cors": "^2.8.5",
     "express": "^4.19.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "yarn": "^1.22.22"
   },
   "devDependencies": {
     "nodemon": "^3.1.0",
