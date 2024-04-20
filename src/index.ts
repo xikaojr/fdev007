@@ -1,6 +1,7 @@
 import express from 'express'
-// import itensRouter from './routers/itens-router'
 import cors from 'cors'
+import PublicRoutes from './routers/public-routes';
+import PrivateRoutes from './routers/private-routes';
 
 const PORT = 8009
 const app = express()
@@ -10,11 +11,9 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors({
   origin: '*'
 }))
-// app.use('/api', itensRouter)
-app.use('/console', (req: any, res: any) => {
-  console.log(req.headers)
-  console.log(req.body)
-})
+
+app.use(PublicRoutes);
+app.use('/api', PrivateRoutes)
 
 app.use((req: any, res: any) => {
   res.status(404).send('Rota não encontrada!')
