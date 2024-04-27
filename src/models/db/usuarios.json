@@ -1,14 +1,8 @@
 [
   {
+    "id": "1713621794495",
     "nome": "Administrador",
     "login": "admin",
-    "senha": "admin",
-    "id": "1713621794495"
-  },
-  {
-    "nome": "Xikão Junior",
-    "login": "xikaojr",
-    "senha": "123",
-    "id": "1713625233546"
+    "senha": "admin"
   }
 ]

@@ -2,10 +2,15 @@ import { Request, Response } from 'express';
 import UsuariosModel from "../models/Usuarios";
 import jwt from 'jsonwebtoken';
 
+type UsuarioParams = {
+  nome?: string,
+  login?: string,
+  id?: string
+}
+
 class UsuariosController {
   async login(request: Request, response: Response) {
-    const login = request.body.login;
-    const senha = request.body.senha;
+    const { login, senha } = request.body;
     const model = new UsuariosModel();
     const data = await model.login(login, senha);
     if (data[0] !== undefined) {
@@ -29,9 +34,13 @@ class UsuariosController {
 
   async findAll(request: Request, response: Response) {
     const model = new UsuariosModel();
-    const pesquisa: string = <string>request.query.pesquisa;
+    const { nome, login, id }: UsuarioParams = request.query; // Aqui você pode ajustar o tipo de UsuarioParams conforme necessário
 
-    const data = await model.findAll(pesquisa);
+    const data = await model.findAll({ nome, login, id });
+
+    // if (!data.length)
+    //   return response.status(404).json({ message: "Usuário não encontrado" });
+
     return response.json(data);
   }
 
@@ -39,6 +48,10 @@ class UsuariosController {
     const id: string = request.params.id;
     const model = new UsuariosModel();
     const data = await model.findOne(id);
+
+    if (!data)
+      return response.status(404).json({ message: "Usuário não encontrado" });
+
     return response.json(data);
   }
 
@@ -51,10 +64,10 @@ class UsuariosController {
 
   async update(request: Request, response: Response) {
     const body = request.body;
-    const id: string = request.params.id;
+    const { id }: { id: string } = request.body;
     const model = new UsuariosModel();
     const data = await model.update(body, id);
-    return response.json(data);
+    return response.status(204);
   }
 
   async delete(request: Request, response: Response) {

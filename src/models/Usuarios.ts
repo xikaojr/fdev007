@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { v4 as uuidv4 } from 'uuid';
 
 type Usuario = {
   id?: string;
@@ -8,6 +9,12 @@ type Usuario = {
   senha: string;
 }
 
+interface UsuarioParams {
+  id: string;
+  nome: string;
+  login: string;
+  // Outras propriedades do usuário
+}
 class UsuariosModel {
   async login(login: string, senha: string) {
     const usuarios: Usuario[] = this.readUsuariosFile();
@@ -19,34 +26,41 @@ class UsuariosModel {
     const usuarios = this.readUsuariosFile();
     return Promise.resolve([{ total: usuarios.length }]);
   }
+  findAll({ nome, login, id }: { nome?: string; login?: string; id?: string }): Promise<Usuario[]> {
+    let usuarios: Usuario[] = this.readUsuariosFile();
+    const filtrosAtivos = Object.keys({ nome, login, id }).filter(chave => !!{ nome, login, id }[chave]);
 
-  findAll(pesquisa: string) {
-    const usuarios: Usuario[] = this.readUsuariosFile();
-
-    let filteredUsers = [...usuarios];
-    if (pesquisa) {
-      const searchTerm = pesquisa.toLowerCase();
-      filteredUsers = usuarios.filter(user =>
-        user.nome.toLowerCase().includes(searchTerm) ||
-        user.login.toLowerCase().includes(searchTerm)
-      );
+    if (filtrosAtivos.length === 0) {
+      return Promise.resolve(usuarios);
     }
 
-    return Promise.resolve(filteredUsers);
+    return Promise.resolve(usuarios.filter(usuario => {
+      return (!nome || usuario.nome === nome) &&
+        (!login || usuario.login === login) &&
+        (!id || usuario.id === id);
+    }));
   }
 
   findOne(id: string) {
     const usuarios: Usuario[] = this.readUsuariosFile();
     const usuario: Usuario | undefined = usuarios.find(user => user.id === id);
-    return Promise.resolve(usuario ? [usuario] : []);
+    return Promise.resolve(usuario);
   }
 
   create(data: Usuario) {
-    const usuarios = this.readUsuariosFile();
-    const newUsuario = { ...data, id: Date.now().toString() };
+    const usuarios: Usuario[] = this.readUsuariosFile();
+    const newUsuario = { ...data, id: uuidv4() };
+
+    let findUser: Usuario | undefined = usuarios.find(user => user.login === newUsuario.login);
+
+    if (findUser) return Promise.resolve({
+      "msg": "Usuário já existe no banco de dados!",
+      "status": 400
+    });
+
     usuarios.push(newUsuario);
     this.writeUsuariosFile(usuarios);
-    return Promise.resolve([newUsuario]);
+    return Promise.resolve(newUsuario);
   }
 
   update(data: [], id: string) {
@@ -60,7 +74,7 @@ class UsuariosModel {
     const updatedUsuario = { ...usuarios[index], ...data };
     usuarios[index] = updatedUsuario;
     this.writeUsuariosFile(usuarios);
-    return Promise.resolve([updatedUsuario]);
+    return Promise.resolve([]);
   }
 
   delete(id: string) {

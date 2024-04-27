@@ -1,27 +1,22 @@
 import express from 'express'
 import jwt from 'jsonwebtoken';
-import usuariosRouters from './usuarios-router';
+import usuariosRouters from './users/userRouter';
 
 const PrivateRoutes = express.Router();
 
 PrivateRoutes.use(function (request, response, next) {
     let logged = false
-    const token: string = <string>request.headers.token;
-    if (token) {
-        try {
-            const tokenDecifrado = jwt.verify(token, 'sis-iw-0928eji0ici43083-90k494830-94398');
-            if (tokenDecifrado) {
-                logged = true;
-            }
-        } catch (e) {
-            return response.json(e);
-        }
-    }
+    const token: string = <string>request.headers.authorization;
 
-    if (logged === false) {
-        return response.json({ 'message': 'Token inválido ou não enviado!' })
+    if (!token) {
+        return response.status(401).json({ message: 'Token de autenticação não fornecido' });
     }
-    next();
+    try {
+        jwt.verify(token.split(' ')[1], 'sis-iw-0928eji0ici43083-90k494830-94398');
+        next();
+    } catch (e) {
+        return response.status(403).json({ message: 'Falha na autenticação do token' });
+    }
 });
 
 PrivateRoutes.use(usuariosRouters);
