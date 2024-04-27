@@ -18,8 +18,9 @@ interface UsuarioParams {
 class UsuariosModel {
   async login(login: string, senha: string) {
     const usuarios: Usuario[] = this.readUsuariosFile();
-    const usuario: Usuario | undefined = usuarios.find(user => user.login === login && user.senha === senha);
-    return usuario ? [usuario] : [];
+    const usuario: Usuario | undefined = usuarios.find(user => user.login === login
+      && user.senha === senha);
+    return usuario;
   }
 
   getTotalRegister() {

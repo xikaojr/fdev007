@@ -5,7 +5,6 @@ import usuariosRouters from './users/userRouter';
 const PrivateRoutes = express.Router();
 
 PrivateRoutes.use(function (request, response, next) {
-    let logged = false
     const token: string = <string>request.headers.authorization;
 
     if (!token) {

@@ -13,8 +13,8 @@ class UsuariosController {
     const { login, senha } = request.body;
     const model = new UsuariosModel();
     const data = await model.login(login, senha);
-    if (data[0] !== undefined) {
-      const usuario = data[0];
+    if (data !== undefined) {
+      const usuario = data;
       const dataUsuario = {
         id: usuario.id,
         nome: usuario.nome,
@@ -34,13 +34,8 @@ class UsuariosController {
 
   async findAll(request: Request, response: Response) {
     const model = new UsuariosModel();
-    const { nome, login, id }: UsuarioParams = request.query; // Aqui você pode ajustar o tipo de UsuarioParams conforme necessário
-
+    const { nome, login, id }: UsuarioParams = request.query;
     const data = await model.findAll({ nome, login, id });
-
-    // if (!data.length)
-    //   return response.status(404).json({ message: "Usuário não encontrado" });
-
     return response.json(data);
   }
 
@@ -67,7 +62,7 @@ class UsuariosController {
     const { id }: { id: string } = request.body;
     const model = new UsuariosModel();
     const data = await model.update(body, id);
-    return response.status(204);
+    return response.status(204).send();
   }
 
   async delete(request: Request, response: Response) {
