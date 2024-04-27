@@ -1,6 +1,7 @@
 import express from 'express'
 import jwt from 'jsonwebtoken';
 import usuariosRouters from './users/userRouter';
+import postsRouter from './posts/postRouter';
 
 const PrivateRoutes = express.Router();
 
@@ -18,6 +19,6 @@ PrivateRoutes.use(function (request, response, next) {
     }
 });
 
-PrivateRoutes.use(usuariosRouters);
+PrivateRoutes.use(usuariosRouters, postsRouter);
 
 export default PrivateRoutes;

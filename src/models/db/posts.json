@@ -6,5 +6,10 @@
     "userId": 1,
     "createdAt": "2024-04-27T12:00:00Z",
     "updatedAt": "2024-04-27T12:00:00Z"
+  },
+  {
+    "title": "Primeiro post",
+    "content": "primeiro post",
+    "id": "70ba39f2-82ef-4d21-8ba6-2188c633ba9d"
   }
 ]
