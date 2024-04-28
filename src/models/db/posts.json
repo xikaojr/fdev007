@@ -1,9 +1,9 @@
 [
   {
-    "id": 1,
-    "title": "Postagem Inicial",
+    "id": "e97aeb1b-301f-40bb-a9a7-596ac32f0da6",
+    "title": "NodeJS com Express",
     "content": "Conteúdo da postagem...",
-    "userId": 1,
+    "userId": "1323f0a8-46e7-4ecf-bcdc-84951fe5d2ce",
     "createdAt": "2024-04-27T12:00:00Z",
     "updatedAt": "2024-04-27T12:00:00Z"
   }
