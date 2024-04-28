@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import UsuariosModel from "../models/Usuarios";
 import jwt from 'jsonwebtoken';
+import AbstractController from './AbstractController';
 
 type UsuarioParams = {
   nome?: string,
@@ -8,7 +9,10 @@ type UsuarioParams = {
   id?: string
 }
 
-class UsuariosController {
+class UsuariosController extends AbstractController {
+  constructor() {
+    super(new UsuariosModel());
+  }
   async login(request: Request, response: Response) {
     const { login, senha } = request.body;
     const model = new UsuariosModel();
@@ -32,45 +36,44 @@ class UsuariosController {
     return response.json({ message: 'Usuário ou senha inválido.' });
   }
 
-  async findAll(request: Request, response: Response) {
-    const model = new UsuariosModel();
-    const { nome, login, id }: UsuarioParams = request.query;
-    const data = await model.findAll({ nome, login, id });
-    return response.json(data);
-  }
+  // findAll = async(request: Request, response: Response): Promise<void> => {
+  //   const { nome, login, id }: UsuarioParams = request.query;
+  //   const data = await this.model.find({ nome, login, id });
+  //   response.json(data);
+  // }
 
-  async findOne(request: Request, response: Response) {
-    const id: string = request.params.id;
-    const model = new UsuariosModel();
-    const data = await model.findOne(id);
+  // async findOne(request: Request, response: Response) {
+  //   const id: string = request.params.id;
+  //   const model = new UsuariosModel();
+  //   const data = await model.findOne(id);
 
-    if (!data)
-      return response.status(404).json({ message: "Usuário não encontrado" });
+  //   if (!data)
+  //     return response.status(404).json({ message: "Usuário não encontrado" });
 
-    return response.json(data);
-  }
+  //   return response.json(data);
+  // }
 
-  async create(request: Request, response: Response) {
-    const body = request.body;
-    const model = new UsuariosModel();
-    const data = await model.create(body);
-    return response.json(data);
-  }
+  // async create(request: Request, response: Response) {
+  //   const body = request.body;
+  //   const model = new UsuariosModel();
+  //   const data = await model.create(body);
+  //   return response.json(data);
+  // }
 
-  async update(request: Request, response: Response) {
-    const body = request.body;
-    const { id }: { id: string } = request.body;
-    const model = new UsuariosModel();
-    const data = await model.update(body, id);
-    return response.status(204).send();
-  }
+  // async update(request: Request, response: Response) {
+  //   const body = request.body;
+  //   const { id }: { id: string } = request.body;
+  //   const model = new UsuariosModel();
+  //   const data = await model.update(body, id);
+  //   return response.status(204).send();
+  // }
 
-  async delete(request: Request, response: Response) {
-    const id: string = request.params.id;
-    const model = new UsuariosModel();
-    const data = await model.delete(id);
-    return response.json(data);
-  }
+  // async delete(request: Request, response: Response) {
+  //   const id: string = request.params.id;
+  //   const model = new UsuariosModel();
+  //   await model.delete(id);
+  //   return response.status(204).send();
+  // }
 }
 
 export default UsuariosController;

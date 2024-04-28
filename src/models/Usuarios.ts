@@ -1,34 +1,37 @@
-import fs from 'fs';
-import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
-
-type Usuario = {
-  id?: string;
-  nome: string;
-  login: string;
-  senha: string;
-}
+import AbstractModel from './Abstract';
+import { Usuario } from '../types/index'
 
 interface UsuarioParams {
-  id: string;
-  nome: string;
-  login: string;
-  // Outras propriedades do usuário
+  id?: string;
+  nome?: string;
+  login?: string;
 }
-class UsuariosModel {
+
+interface Params {
+  [key: string]: string; // Tipagem genérica para os parâmetros
+}
+
+class UsuariosModel extends AbstractModel {
+  constructor() {
+    super('usuarios.json');
+  }
   async login(login: string, senha: string) {
-    const usuarios: Usuario[] = this.readUsuariosFile();
+    const usuarios: Usuario[] = this.readFile();
     const usuario: Usuario | undefined = usuarios.find(user => user.login === login
       && user.senha === senha);
     return usuario;
   }
 
   getTotalRegister() {
-    const usuarios = this.readUsuariosFile();
+    const usuarios = this.readFile();
     return Promise.resolve([{ total: usuarios.length }]);
   }
-  findAll({ nome, login, id }: { nome?: string; login?: string; id?: string }): Promise<Usuario[]> {
-    let usuarios: Usuario[] = this.readUsuariosFile();
+
+  find(params: Params): Promise<Usuario[]> {
+    const { nome, login, id }: UsuarioParams = params;
+    
+    let usuarios: Usuario[] = this.readFile();
     const filtrosAtivos = Object.keys({ nome, login, id }).filter(chave => !!{ nome, login, id }[chave]);
 
     if (filtrosAtivos.length === 0) {
@@ -42,14 +45,14 @@ class UsuariosModel {
     }));
   }
 
-  findOne(id: string) {
-    const usuarios: Usuario[] = this.readUsuariosFile();
+  findById(id: string) {
+    const usuarios: Usuario[] = this.readFile();
     const usuario: Usuario | undefined = usuarios.find(user => user.id === id);
     return Promise.resolve(usuario);
   }
 
   create(data: Usuario) {
-    const usuarios: Usuario[] = this.readUsuariosFile();
+    const usuarios: Usuario[] = this.readFile();
     const newUsuario = { ...data, id: uuidv4() };
 
     let findUser: Usuario | undefined = usuarios.find(user => user.login === newUsuario.login);
@@ -60,12 +63,12 @@ class UsuariosModel {
     });
 
     usuarios.push(newUsuario);
-    this.writeUsuariosFile(usuarios);
+    this.writeFile(usuarios);
     return Promise.resolve(newUsuario);
   }
 
   update(data: [], id: string) {
-    const usuarios: Usuario[] = this.readUsuariosFile();
+    const usuarios: Usuario[] = this.readFile();
     const index: number = usuarios.findIndex(user => user.id === id);
 
     if (index === -1) {
@@ -74,33 +77,22 @@ class UsuariosModel {
 
     const updatedUsuario = { ...usuarios[index], ...data };
     usuarios[index] = updatedUsuario;
-    this.writeUsuariosFile(usuarios);
+    this.writeFile(usuarios);
     return Promise.resolve([]);
   }
 
-  delete(id: string) {
-    const usuarios: Usuario[] = this.readUsuariosFile();
+  delete(id: string): Promise<void> {
+    const usuarios: Usuario[] = this.readFile();
     const index: number = usuarios.findIndex(user => user.id === id);
 
     if (index === -1) {
-      return Promise.resolve([]);
+      return Promise.resolve();
     }
 
-    const deletedUsuario = usuarios.splice(index, 1)[0];
-    this.writeUsuariosFile(usuarios);
-    return Promise.resolve([deletedUsuario]);
+    usuarios.splice(index, 1)[0];
+    this.writeFile(usuarios);
+    return Promise.resolve();
   }
 
-  readUsuariosFile() {
-    const filePath = path.join(__dirname, 'db', 'usuarios.json');
-    const fileData = fs.readFileSync(filePath, 'utf-8');
-    return JSON.parse(fileData);
-  }
-
-  writeUsuariosFile(data: Usuario[]) {
-    const filePath = path.join(__dirname, 'db', 'usuarios.json');
-    fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf-8');
-  }
 }
-
 export default UsuariosModel;

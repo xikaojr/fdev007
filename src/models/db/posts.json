@@ -6,5 +6,13 @@
     "userId": "1323f0a8-46e7-4ecf-bcdc-84951fe5d2ce",
     "createdAt": "2024-04-27T12:00:00Z",
     "updatedAt": "2024-04-27T12:00:00Z"
+  },
+  {
+    "title": "Postagem Inicial 2",
+    "content": "Conteúdo da postagem 2",
+    "userId": "1323f0a8-46e7-4ecf-bcdc-84951fe5d2ce",
+    "createdAt": "2024-04-28T18:30:44.537Z",
+    "updatedAt": "2024-04-28T18:30:44.537Z",
+    "id": "949405c6-33ae-4b13-87c2-33f7ba3a5279"
   }
 ]

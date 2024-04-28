@@ -1,0 +1,26 @@
+[
+  {
+    "id": "e97aeb1b-301f-40bb-a9a7-596ac32f0da6",
+    "userId": "1323f0a8-46e7-4ecf-bcdc-84951fe5d2ce",
+    "postId": "1323f0a8-46e7-4ecf-bcdc-84951fe5d2ce",
+    "action": "like",
+    "createdAt": "2024-04-27T12:00:00Z",
+    "updatedAt": "2024-04-27T12:00:00Z"
+  },
+  {
+    "id": "e97aeb1b-301f-40bb-a9a7-596ac32f0da6",
+    "userId": "1323f0a8-46e7-4ecf-bcdc-84951fe5d2ce",
+    "postId": "1323f0a8-46e7-4ecf-bcdc-84951fe5d2ce",
+    "action": "deslike",
+    "createdAt": "2024-04-27T12:00:00Z",
+    "updatedAt": "2024-04-27T12:00:00Z"
+  },
+  {
+    "userId": "1323f0a8-46e7-4ecf-bcdc-84951fe5d2ce",
+    "postId": "1323f0a8-46e7-4ecf-bcdc-84951fe5d2ce",
+    "action": "like",
+    "createdAt": "2024-04-27T12:00:00Z",
+    "updatedAt": "2024-04-27T12:00:00Z",
+    "id": "03fa8c83-e4c6-41f3-bde3-4e3fc2ce20ee"
+  }
+]

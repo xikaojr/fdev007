@@ -1,15 +1,6 @@
-import fs from 'fs';
-import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
-
-type Post = {
-  id?: string;
-  title: string;
-  content: string;
-  userId: string;
-  createdAt: string;
-  updatedAt: string;
-}
+import AbstractModel from './Abstract';
+import { Post } from '../types/index'
 
 interface PostParams {
   id?: string;
@@ -17,13 +8,16 @@ interface PostParams {
   userId?: string;
 }
 
-class PostsModel {
+class PostsModel extends AbstractModel {
+  constructor() {
+    super('posts.json');
+  }
   getTotalRegister() {
-    const posts = this.PostsreadPostsFile();
+    const posts = this.readFile();
     return Promise.resolve([{ total: posts.length }]);
   }
   findAll({ title, userId, id }: PostParams): Promise<Post[]> {
-    let posts: Post[] = this.PostsreadPostsFile();
+    let posts: Post[] = this.readFile();
     const filtrosAtivos = Object.keys({ title, userId, id }).filter(chave => !!{ title, userId, id }[chave]);
 
     if (filtrosAtivos.length === 0) {
@@ -38,13 +32,13 @@ class PostsModel {
   }
 
   findOne(id: string) {
-    const posts: Post[] = this.PostsreadPostsFile();
+    const posts: Post[] = this.readFile();
     const usuario: Post | undefined = posts.find(post => post.id === id);
     return Promise.resolve(usuario);
   }
 
   create(data: Post) {
-    const posts: Post[] = this.PostsreadPostsFile();
+    const posts: Post[] = this.readFile();
     const newPost = { ...data, id: uuidv4() };
 
     let findUser: Post | undefined = posts.find(user => user.title === newPost.title);
@@ -55,12 +49,12 @@ class PostsModel {
     });
 
     posts.push(newPost);
-    this.writePostsFile(posts);
+    this.writeFile(posts);
     return Promise.resolve(newPost);
   }
 
   update(data: [], id: string) {
-    const posts: Post[] = this.PostsreadPostsFile();
+    const posts: Post[] = this.readFile();
     const index: number = posts.findIndex(user => user.id === id);
 
     if (index === -1) {
@@ -69,35 +63,23 @@ class PostsModel {
 
     const updatedPost = { ...posts[index], ...data };
     posts[index] = updatedPost;
-    this.writePostsFile(posts);
+    this.writeFile(posts);
     return Promise.resolve([]);
   }
 
-  delete(id: string) {
-    const posts: Post[] = this.PostsreadPostsFile();
-    const index: number = posts.findIndex(post => post.id === id);
+  delete(id: string): Promise<void> {
+    const usuarios: Post[] = this.readFile();
+    const index: number = usuarios.findIndex(user => user.id === id);
 
     if (index === -1) {
-      return Promise.resolve([]);
+      return Promise.resolve();
     }
 
-    const deletedPost = posts.splice(index, 1)[0];
-    console.log(deletedPost);
-    
-    this.writePostsFile(posts);
-    return Promise.resolve([deletedPost]);
+    usuarios.splice(index, 1)[0];
+    this.writeFile(usuarios);
+    return Promise.resolve();
   }
 
-  PostsreadPostsFile() {
-    const filePath = path.join(__dirname, 'db', 'posts.json');
-    const fileData = fs.readFileSync(filePath, 'utf-8');
-    return JSON.parse(fileData);
-  }
-
-  writePostsFile(data: Post[]) {
-    const filePath = path.join(__dirname, 'db', 'posts.json');
-    fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf-8');
-  }
 }
 
 export default PostsModel;
