@@ -41,15 +41,18 @@ class  LikesController {
 
     async create(request: Request, response: Response) {
         try {
-            const token = request.headers['authorization'];
-            if (!token) {
-                return response.status(401).json({ message: 'Token não informado' });
-            }
-
-            const decodedToken = jwt.verify(token as string, 'sis-iw-0928eji0ici43083-90k494830-94398');
+            
+            const token: string = <string>request.headers.authorization;
+           
+            const decodedToken = jwt.verify(token.split(' ')[1], 'sis-iw-0928eji0ici43083-90k494830-94398');
+            const body = request.body;
             const userId = (decodedToken as any).userId;
 
-            const body = request.body;
+         if (!body.userId) {
+            body.userId = decodedToken;
+            }
+
+
             const model = new LikesModel();
             const data = await model.create(body, userId);
             return response.json(data);

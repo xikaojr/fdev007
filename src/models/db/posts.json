@@ -11,5 +11,17 @@
     "title": "Primeiro post",
     "content": "primeiro post",
     "id": "70ba39f2-82ef-4d21-8ba6-2188c633ba9d"
+  },
+  {
+    "postId": 1,
+    "action": [
+      "like"
+    ],
+    "id": "04bfa530-05d0-4e20-993b-a9910355eee9"
+  },
+  {
+    "title": "terceiro post",
+    "content": "terceiro post...",
+    "id": "d7ef307a-b20c-439b-9463-41dcb027130f"
   }
 ]
