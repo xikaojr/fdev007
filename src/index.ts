@@ -15,6 +15,7 @@ app.use(cors({
 app.use(PublicRoutes);
 app.use('/api', PrivateRoutes)
 
+
 app.use((req: any, res: any) => {
   res.status(404).send('Rota não encontrada!')
 })

@@ -27,9 +27,9 @@ class PostsModel {
         return Promise.resolve(posts.find(post => post.id === id));
     }
 
-    create(data: Post) {
+    create(data: Post, userId: string) {
         const posts: Post[] = this.readPostsFile();
-        const newPost = { ...data, id: uuidv4() };
+        const newPost = { ...data, id: uuidv4(), userId };
         posts.push(newPost);
         this.writePostsFile(posts);
         return Promise.resolve(newPost);
