@@ -1,0 +1,7 @@
+[
+    {
+        "postId": 1,
+        "userId": 1,
+        "action": ["like", "deslike"]
+    }
+]
