@@ -13,7 +13,7 @@ app.use(cors({
 }))
 
 app.get('/', (req: any, res: any) => {
-  return res.send('Express Typescript on Vercel')
+  return res.send('ESTAMOS ON!!!!!!!!')
 })
 
 app.get('/ping', (req: any, res: any) => {
