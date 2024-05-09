@@ -12,6 +12,14 @@ app.use(cors({
   origin: '*'
 }))
 
+app.get('/', (req: any, res: any) => {
+  return res.send('Express Typescript on Vercel')
+})
+
+app.get('/ping', (req: any, res: any) => {
+  return res.send('pong 🏓')
+})
+
 app.use(PublicRoutes);
 app.use('/api', PrivateRoutes)
 
