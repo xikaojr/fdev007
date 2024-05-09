@@ -17,7 +17,7 @@ app.get('/', (req: any, res: any) => {
 })
 
 app.get('/ping', (req: any, res: any) => {
-  return res.send('pong 🏓')
+  return res.send('Pong 🏓')
 })
 
 app.use(PublicRoutes);
