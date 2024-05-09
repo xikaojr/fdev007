@@ -6,7 +6,7 @@ node_modules/
 *.js.map
 
 # Arquivos de configuração do TypeScript
-tsconfig.json
+# tsconfig.json
 tsconfig.tsbuildinfo
 
 # Arquivos de log
