@@ -42,7 +42,6 @@ abstract class AbstractController {
     }
   }
 
-
   create = async (req: Request, res: Response): Promise<void> => {
     try {
       if (!req.body.createdAt)
@@ -51,7 +50,6 @@ abstract class AbstractController {
       if (!req.body.updatedAt)
         req.body.updatedAt = new Date().toISOString();
 
-      // Verifica se this.model está definido
       if (!this.model) {
         throw new Error('Model is not defined');
       }
@@ -63,7 +61,6 @@ abstract class AbstractController {
       res.status(400).json({ message: 'Bad request' });
     }
   }
-
 
   update = async (req: Request, res: Response): Promise<void> => {
     try {
